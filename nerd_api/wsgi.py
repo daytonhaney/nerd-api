@@ -1,5 +1,5 @@
 """
-WSGI config for apiclone project.
+WSGI config for nerd_api project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
