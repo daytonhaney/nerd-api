@@ -1,39 +1,10 @@
-stopped at git add . 
 
-  celery_worker:
-    build:
-      context: .
-      dockerfile: ./docker/local/django/Dockerfile
-    command: /start-celeryworker
-    volumes:
-      - .:/app
-    env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
-   depends_on:
-      - redis
-      - postgres
-      - mailhog
-    networks:
-      - nerd_api
+python3 -m venv venv 
 
-  flower:
-    build:
-      context: .
-      dockerfile: ./docker/local/django/Dockerfile
-    command: /start-flower
-    volumes:
-      - flower_data:/data
-    env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
-    ports:
-      - "5555:5555"
-    depends_on:
-      - redis
-      - postgres
-    networks:
-      - nerd_api
+source venv/bin/activate 
+
+docker compose -f local.yml up --build -d remove-orphans
+
 
   nginx:
     restart: always
@@ -52,7 +23,40 @@ stopped at git add .
 
 
 
-  redis:
-    image: redis:7-alpine
-    networks:
+
+installing docker, docker-desktop and logging in
+
+
+dockerinstall.sh - 
+#!/bin/bash
+$for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+chmod +u dockerinstall.sh 
+./dockerinstall.sh
+
+install docker-cd 
       - nerd_api
+
+
+
+
+
+installing docker, docker-desktop and logging in
+
+
+dockerinstall.sh - 
+#!/bin/bash
+$for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+chmod +u dockerinstall.sh 
+./dockerinstall.sh
+
+install docker-cd 
+
+$ docker volume list 
+
+$ docker volume inspect xyz 
+
+
+
+$ docker compose -f local.yml exec postgres backup
