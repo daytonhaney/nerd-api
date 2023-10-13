@@ -60,3 +60,5 @@ $ docker volume inspect xyz
 
 
 $ docker compose -f local.yml exec postgres backup
+
+python3 -c "import secrets; print(secrets.token_urlsafe(38))"

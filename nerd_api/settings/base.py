@@ -30,8 +30,6 @@ DJANGO_APPS = [
     "django.contrib.sites",
 ]
 
-
-
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_filters",
@@ -39,7 +37,7 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "drf_yasg",
     "corsheaders",
-    "taggit",
+    # "taggit",
 ]
 
 LOCAL_APPS = [
@@ -48,12 +46,9 @@ LOCAL_APPS = [
     "core_apps.users",
 ]
 
-
-
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    #"coresheaders.middleware.CorsMiddleware",
+    # "coresheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -82,14 +77,14 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = "nerd_api.wsgi.application"
+# WSGI_APPLICATION = "nerd_api.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-#DATABASES = {"default": environ.db("DATABASE_URL")}
+# DATABASES = {"default": environ.db("DATABASE_URL")}
 
 DATABASES = {
     "default": {
@@ -98,9 +93,6 @@ DATABASES = {
     }
 }
 
-
-
-
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -108,10 +100,6 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
     "django.contrib.auth.hashers.ScryptSHA256PasswordHasher",
 ]
-
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -136,29 +124,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
-
-SITE_ID =1 
-
-
-
-
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 ADMIN_URL = "supersecret/"
-
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = str(ROOT_DIR / "staticfiles")
-
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = str(ROOT_DIR / "mediafiles")
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -180,8 +157,7 @@ LOGGING = {
     "handlers": {
         "console": {
             "level": "DEBUG",
-            "class": "logging.StreamHandler",
-               
+            "class": "logging.StreamHandler",              
             "formatter": "verbose",
         }
     },
