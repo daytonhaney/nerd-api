@@ -2,12 +2,16 @@ ARG PYTHON_VERSION=3.12-bullseye
 FROM python:${PYTHON_VERSION} as python
 FROM python as python-build-stage
 ARG BUILD_ENVIRONMENT=local
+
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
     libpq-dev
+
 COPY ./requirements .
+
 RUN pip wheel --wheel-dir /usr/src/app/wheels \
   -r ${BUILD_ENVIRONMENT}.txt
+
 FROM python as python-run-stage
 ARG BUILD_ENVIRONMENT=local
 ARG APP_HOME=./app
@@ -43,7 +47,6 @@ RUN chmod +x /start
 #COPY ./docker/local/django/celery/flower/start /start-flower
 #RUN sed -i 's/\r$//g' /start-flower
 #RUN chmod +x /start-flower
-
 
 COPY . ${APP_HOME}
 
