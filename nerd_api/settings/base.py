@@ -13,7 +13,7 @@ APP_DIR = ROOT_DIR / "core_apps"
 SECRET_KEY = "_MaTWSbnfGgwo1LuP3OVX6TQHxIO4xjenHsDNYPZ65Fmd5Pa4DU"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DJANGO_DEBUG",False)
+DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = ["localhost"]
 
@@ -136,14 +136,19 @@ STATIC_URL = "/staticfiles/"
 STATIC_ROOT = str(ROOT_DIR / "staticfiles")
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = str(ROOT_DIR / "mediafiles")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 CORS_URLS_REGEX = r"^/api/.*$"
 
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
+
+AUTH_USER_MODEL = "users.User"
+
 
 LOGGING = {
     "version": 1,
@@ -157,7 +162,7 @@ LOGGING = {
     "handlers": {
         "console": {
             "level": "DEBUG",
-            "class": "logging.StreamHandler",              
+            "class": "logging.StreamHandler",
             "formatter": "verbose",
         }
     },
