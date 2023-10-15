@@ -26,4 +26,5 @@
 
   Credit:
 
-![apicredit](https://github.com/runtimejpp/apiclone/assets/37848207/68569742-7dd9-4667-9bf8-ec8f3167c755)
+
+![credit](https://github.com/runtimejpp/nerd-api/assets/37848207/f8fcefda-834f-40e8-9b9b-4539e6721aae)

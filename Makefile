@@ -17,7 +17,8 @@ api-logs:
 
 makemigrations:
 
-		docker compose -f local.yml run --rm api manage.py makemigrations
+		docker compose -f local.yml run --rm api python3 manage.py makemigrations
+
 
 migrate:
 

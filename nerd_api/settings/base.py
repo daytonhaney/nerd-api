@@ -84,14 +84,14 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-# DATABASES = {"default": environ.db("DATABASE_URL")}
+DATABASES = {"default": env.db("DATABASE_URL")}
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
-    }
-}
+# DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.sqlite3",
+#        "NAME": "mydatabase",
+#    }
+# }
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
