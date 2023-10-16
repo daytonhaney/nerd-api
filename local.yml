@@ -13,11 +13,12 @@ services:
     expose:
       - "8000"
     env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
+      - .envs/.local/.django
+      - .envs/.local/.postgres
     depends_on:
       - postgres
       - mailhog
+      - redis
     networks:
       - nerd_api
 
@@ -29,7 +30,7 @@ services:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
     env_file:
-      - ./.envs/.local/.postgres
+      - .envs/.local/.postgres
     networks:
       - nerd_api
 
@@ -40,7 +41,47 @@ services:
       - "8025:8025"
     networks:
       - nerd_api
-  
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - nerd_api 
+
+  celery_worker:
+    build: 
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    command: /start-celeryworker
+    volumes:
+      - .:/app
+    env_file:
+      - .envs/.local/.django
+      - .envs/.local/.postgres 
+    depends_on:
+      - redis
+      - postgres
+      - mailhog 
+    networks:
+      - nerd_api
+
+  flower:
+    build:
+      context: . 
+      dockerfile: ./docker/local/django/Dockerfile
+    command: /start-flower
+    volumes:
+        - flower_data:/data
+    env_file:
+      - .envs/.local/.django
+      - .envs/.local/.postgres 
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - nerd_api
+
   nginx:
     restart: always
     depends_on: 
@@ -49,8 +90,8 @@ services:
       - static_volume:/app/staticfiles 
       - media_volume:/app/mediafiles
     build: 
-      context: ./docker/local/nginx
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./docker/local/nginx/Dockerfile
     ports:
       - "8080:80"
     networks:

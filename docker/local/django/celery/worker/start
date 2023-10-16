@@ -3,4 +3,6 @@
 set -o errexit 
 set -o nounset 
 
+
+# development use only 
 exec watchfiles celery.__main__.main --args '-A nerd_api.celery worker -l INFO'

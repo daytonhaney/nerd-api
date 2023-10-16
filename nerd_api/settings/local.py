@@ -11,3 +11,11 @@ SECRET_KEY = env(
 DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
+
+EMAIL_BACKEND="dj_celery_email.backends.CeleryEmailBackend"
+EMAIL_HOST=env("EMAIL_HOST", default="mailhog")
+EMAIL_PORT=env("EMAIL_PORT")
+DOMAIN=env("DOMAIN")
+SITE_NAME="JPP Site Template"
+
+
