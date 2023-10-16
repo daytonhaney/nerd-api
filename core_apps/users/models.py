@@ -9,23 +9,23 @@ from .managers import CustomUserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """user mod"""
-
     pkid = models.BigAutoField(primary_key=True, editable=False)
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     first_name = models.CharField(verbose_name=_("first name"), max_length=50)
     last_name = models.CharField(verbose_name=_("last name"), max_length=50)
     email = models.EmailField(
-        verbose_name=_("email address"), db_index=True, unique=True, max_length=150
+        verbose_name=_("email address"), db_index=True, unique=True
     )
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = "email"
+
     REQUIRED_FIELDS = ["first_name", "last_name"]
 
-    object = CustomUserManager()
+    objects = CustomUserManager()
 
     class Meta:
         verbose_name = _("user")
@@ -39,5 +39,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.first_name.title()} {self.last_name.title()}"
 
     @property
-    def get_first_name(self):
+    def get_short_name(self):
         return self.first_name
