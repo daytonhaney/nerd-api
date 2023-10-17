@@ -6,15 +6,16 @@ services:
       context: .
       dockerfile: ./docker/local/django/Dockerfile
     command: /start
+    container_name: django-api
     volumes:
-      - .:/app:z
+      - .:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
     expose:
       - "8000"
     env_file:
-      - .envs/.local/.django
-      - .envs/.local/.postgres
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
     depends_on:
       - postgres
       - mailhog
@@ -26,11 +27,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/local/postgres/Dockerfile
+    container_name: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
     env_file:
-      - .envs/.local/.postgres
+      - ./.envs/.local/.postgres
     networks:
       - nerd_api
 
@@ -43,37 +45,40 @@ services:
       - nerd_api
 
   redis:
-    image: redis:7-alpine
+    image: redis:6-alpine
+    container_name: redis
     networks:
-      - nerd_api 
+      - nerd_api
 
   celery_worker:
-    build: 
+    build:
       context: .
       dockerfile: ./docker/local/django/Dockerfile
     command: /start-celeryworker
+    container_name: celery_worker
     volumes:
       - .:/app
     env_file:
-      - .envs/.local/.django
-      - .envs/.local/.postgres 
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
     depends_on:
       - redis
       - postgres
-      - mailhog 
+      - mailhog
     networks:
       - nerd_api
 
   flower:
     build:
-      context: . 
+      context: .
       dockerfile: ./docker/local/django/Dockerfile
     command: /start-flower
+    container_name: flower
     volumes:
-        - flower_data:/data
+      - .:/app
     env_file:
-      - .envs/.local/.django
-      - .envs/.local/.postgres 
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
     ports:
       - "5555:5555"
     depends_on:
@@ -84,26 +89,25 @@ services:
 
   nginx:
     restart: always
-    depends_on: 
-      - api 
+    depends_on:
+      - api
     volumes:
-      - static_volume:/app/staticfiles 
+      - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
-    build: 
-      context: .
-      dockerfile: ./docker/local/nginx/Dockerfile
+    build:
+      context: ./docker/local/nginx
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     networks:
-      - nerd_api 
+      - nerd_api
 
 networks:
   nerd_api:
     driver: bridge
 
 volumes:
-  static_volume:
-  media_volume:
   local_postgres_data: {}
   local_postgres_data_backups: {}
-  flower_data: {}
+  static_volume:
+  media_volume:
