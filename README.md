@@ -22,7 +22,7 @@
 
 - Redis: https://www.redis.io
 
-- Elastic Search: https://www.elastic.io
+- Elastic Search: https://www.elastic.co
 
   Credit:
 

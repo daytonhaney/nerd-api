@@ -1,6 +1,9 @@
 from .celery import app as celery_app
 
-__all__ = ["celery_app"]
+# __all__ = ["celery_app"]
+
+__all__ = ("celery_app",)
+
 
 """
 adding as a tuple ("celery_app", ) was giving issues for some reason = 

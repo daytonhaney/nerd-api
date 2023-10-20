@@ -8,14 +8,14 @@ SECRET_KEY = env(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# TODO change in prod
 DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
 
-EMAIL_BACKEND="dj_celery_email.backends.CeleryEmailBackend"
-EMAIL_HOST=env("EMAIL_HOST", default="mailhog")
-EMAIL_PORT=env("EMAIL_PORT")
-DOMAIN=env("DOMAIN")
-SITE_NAME="JPP Site Template"
-
-
+EMAIL_BACKEND = "dj_celery_email.backends.CeleryEmailBackend"
+EMAIL_HOST = env("EMAIL_HOST", default="mailhog")
+EMAIL_PORT = env("EMAIL_PORT")
+DEFAULT_FROM_EMAIL = "support@api.com"
+DOMAIN = env("DOMAIN")
+SITE_NAME = "Nginx Elastic Search Redis Docker Django API"
