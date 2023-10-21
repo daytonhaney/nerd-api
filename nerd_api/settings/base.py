@@ -38,6 +38,7 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "corsheaders",
     "djcelery_email",
+    # TODO "admin_honeypot",
 ]
 
 LOCAL_APPS = [
@@ -92,6 +93,8 @@ DATABASES = {"default": env.db("DATABASE_URL")}
 #        "NAME": "mydatabase",
 #    }
 # }
+
+
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -131,6 +134,7 @@ SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+HONEY_POT_URL = "admin/"
 ADMIN_URL = "supersecret/"
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = str(ROOT_DIR / "staticfiles")
