@@ -109,3 +109,17 @@ Running migrations:
   Applying profiles.0001_initial... OK
 (venv) user@pop-os:~/.../src/py-api$ 
  0:bash*                                                                                                                                                                              "pop-os" 14:30 20-Oct-23
+
+
+
+JWT auth tokens:
+from venv:
+
+used to sign JWT:
+python secrets package
+ -c executes python satements from command line as a script
+$ python3 -c "import secrets; print(secrets.token_urlsafe(38)) 
+
+copy and paste key into .envs/.local/.django in SIGNING_KEY env variable
+
+SIGNING_KEY=<key>

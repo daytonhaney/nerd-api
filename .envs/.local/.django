@@ -5,3 +5,6 @@ EMAIL_PORT=1025
 CELERY_FLOWER_USER=admin
 CELERY_FLOWER_PASSWORD=Pass123456
 
+SIGNING_KEY=m9sXmEb42NVdX1e3KRhkjeDaXSHBNDB9A9okLTlGMX0WaMp0ewo
+
+#ignore errors in vscode: Docker extension think its a Dockerfile
